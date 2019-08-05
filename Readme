@@ -15,3 +15,7 @@
             ==> certConfig 指定存放cert地方，由于小程序需要https协议才能启动
             ==> appConfig 需配置appid和secret两个字符串，分别为小程序的appid和secret
             ==> allowedOrigin 异源访问白名单配置
+
+3、项目demo网址：https://questionnaire.hsbc.liphin.com/
+   新用户可注册新账号（第三方微信/QQ注册登录暂不提供）
+   超级管理者账号：account: admin  pass: 123
