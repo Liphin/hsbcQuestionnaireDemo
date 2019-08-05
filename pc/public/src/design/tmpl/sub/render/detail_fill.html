@@ -1,0 +1,12 @@
+<!--单项选择题-->
+<div ng-if="value.type=='detail_fill'" id="widget_{{$index}}">
+    <div style="font-weight: bold">
+        <!--设置必答非必答题目效果-->
+        <i class="fa fa-star" style="color: #ff6525;font-size: 12px; margin-right: 5px" ng-if="value.data.required"></i>
+        <!--题目序号和标题-->
+        <span>{{design.getQuestionnaireNum($index)}}、{{value.data.title}}</span>
+    </div>
+    <div style="margin-top: 10px">
+        <textarea ng-disabled="design.isDisabled" style="height: 200px" class="form-control" ng-model="value.data.value"></textarea>
+    </div>
+</div>

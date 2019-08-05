@@ -1,0 +1,16 @@
+<!--系统管理-->
+<style>
+    .manageItemSelected {
+        background: #4784ab;
+        color: white;
+    }
+</style>
+<div ng-if="manage.overallData.navigation=='analyseData'" style="height: 100%; background: white">
+
+    <!--问卷统计-->
+    <manage-analyse-sheet-statistic></manage-analyse-sheet-statistic>
+
+    <!--人次数统计-->
+    <manage-analyse-person-statistic></manage-analyse-person-statistic>
+
+</div>

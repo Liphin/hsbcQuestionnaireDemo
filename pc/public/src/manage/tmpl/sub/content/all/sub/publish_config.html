@@ -1,0 +1,42 @@
+<!--发布面板配置信息-->
+<style>
+
+</style>
+<div ng-if="manage.overallData.configPanel.status" align="center"
+     style="background: rgba(93,93,94,0.55);position: fixed;top: 0;left: 0; right: 0; bottom: 0; width: 100%;
+        z-index: {{zIndexHelper.publishConfig}};height: 100%; display: flex;justify-content: center; align-items: center">
+
+    <!--设置面板-->
+    <div style="width: 580px; height: 470px; background: white; display: flex;flex-direction: column; border-radius: 20px">
+        <div style="font-size: 20px">
+            <span style="position: relative; top: 20px; font-size: 17px">相关发布设置</span>
+            <span class="panelClose" style="cursor: pointer;font-size: 35px; float: right; position: relative; right: 20px; top: 10px;"
+                  ng-click="manage.overallData.configPanel.status=false;">&times;</span>
+        </div>
+
+        <!--面板设置-->
+        <div style="text-align: left; padding: 50px;font-size: 17px; position: relative;display: flex; flex-direction: column; flex: 1">
+            <!--是否允许投票人查看的设置操作-->
+            <div>
+                <span style="margin-right: 30px">是否允投票人许查看：</span>
+                <label style="font-weight: normal; cursor: pointer">
+                    <input ng-model="manage.overallData.configPanel.configData.open" type="radio" ng-value="true"/>
+                    <span>是</span>
+                </label>
+                <label style="font-weight: normal; margin-left: 50px; cursor: pointer">
+                    <input ng-model="manage.overallData.configPanel.configData.open" type="radio" ng-value="false"/>
+                    <span>否</span>
+                </label>
+            </div>
+
+            <!--确定、返回按钮-->
+            <div style="position: absolute;bottom: 25px;left: 170px;flex: 1;">
+                <button class="btn btn-info" style="margin-right: 50px;padding: 6px 30px;" ng-click="manage.setPublishConfig()">确定</button>
+                <button class="btn btn-default" style="padding: 6px 30px;"
+                        ng-click="manage.overallData.configPanel.status=false;">返回</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,121 @@
+<!--所有问卷表单-->
+<style>
+    .sheetList {
+        border-color: #becfdc;
+    }
+
+    .sheetList:hover {
+        border-color: rgba(65, 191, 242, 0.56);
+        box-shadow: 0 0 15px #62bff2;
+    }
+
+    .sheetListOpt:hover {
+        color: rgba(29, 146, 238, 0.82);
+    }
+
+    /*发布设置*/
+    .publishConfig{
+        background: #ff7b15;
+    }
+
+    /*发布设置鼠标hover在上面*/
+    .publishConfig:hover{
+        box-shadow: 0 0 5px #ff7b15;
+    }
+</style>
+
+<div ng-if="manage.overallData.navigation=='allSheet'"
+     style="padding: 10px 0 0 50px;position: fixed;top: 50px; left: 160px; background: white; right: 0; bottom: 0; overflow-y:auto">
+
+    <div ng-repeat="value in manage.allSheetData track by $index" style="width: 80%; min-width: 950px;font-size: 15px;border-width: 2px; border-style: solid;
+        padding: 17px 0 0 0;margin: 27px; border-radius: 10px" class="sheetList">
+
+        <div style="padding:0 30px">
+            <div style="display: flex; flex-direction: row;">
+                <!--左侧信息展示-->
+                <div style="text-align: left; flex: 1">
+                    <div ng-if="!value.rename">
+                        <span>{{value.title}}</span>
+                        <i title="重命名" class="fa fa-pencil" style="color: gray; margin-left: 2px; cursor: pointer" ng-click="value.rename=true"></i>
+                    </div>
+                    <div ng-if="value.rename">
+                        <input ng-model="value.title" style="padding: 3px 10px; outline: none; border: 1px solid gainsboro; min-width: 230px; border-radius: 5px"/>
+                        <i title="确定" ng-click="manage.renameSheet(value._id, $index)" class="fa fa-check-square" style="color: #2a8035; margin-left: 2px; cursor: pointer; font-size: 19px"></i>
+                    </div>
+
+                </div>
+
+                <!--中间按钮-->
+                <div style="display: flex; flex-direction: row;margin-right: 40px; color: grey">
+                    <div ng-click="manage.sheetOpt('edit', $index)" class="sheetListOpt" style="cursor: pointer">
+                        <i class="fa fa-edit"></i>
+                        <span style="margin-left: 3px">编辑设计</span>
+                    </div>
+                    <div ng-click="manage.sheetOpt('analyse', $index)" class="sheetListOpt"
+                         style="margin-left: 18px;cursor: pointer">
+                        <i class="fa fa-bar-chart-o"></i>
+                        <span style="margin-left: 3px">统计分析</span>
+                    </div>
+                </div>
+
+                <!--右侧操作按钮-->
+                <div class="sheetListOpt" style="text-align: right; display: flex; flex-direction: row;color: grey">
+                    <!--若未发布则可调节发布状态-->
+                    <div ng-if="value.status==1" ng-click="manage.sheetOpt('release', $index, 2)"
+                         class="sheetListOpt" style="cursor: pointer">
+                        <div>
+                            <i class="fa fa-play-circle-o"></i>
+                            <span style="margin-left: 3px">发布</span>
+                        </div>
+                    </div>
+                    <!--若已发布则可调整为停止状态-->
+                    <div ng-if="value.status==2" ng-click="manage.sheetOpt('release', $index, 1)"
+                         class="sheetListOpt" style="cursor: pointer">
+                        <div ng-if="value.status==2" style="color: #ff7b15">
+                            <i class="fa fa-pause-circle"></i>
+                            <span style="margin-left: 3px">停止</span>
+                        </div>
+                    </div>
+                    <!--已发布的问卷，可查看二维码-->
+                    <div ng-if="value.status==2" ng-click="manage.sheetOpt('qrcode', $index)" class="sheetListOpt"
+                         style="cursor: pointer; margin-left: 18px;color: #ff7b15">
+                        <i class="fa fa-qrcode"></i>
+                        <span style="margin-left: 3px">二维码</span>
+                    </div>
+                    <div ng-click="manage.sheetOpt('copy', $index)" class="sheetListOpt"
+                         style="margin-left: 18px;cursor: pointer">
+                        <i class="fa fa-copy"></i>
+                        <span style="margin-left: 3px">复制</span>
+                    </div>
+
+                    <div ng-click="manage.sheetOpt('delete', $index)" class="sheetListOpt"
+                         style="margin-left: 18px;cursor: pointer">
+                        <i class="fa fa-trash-o"></i>
+                        <span style="margin-left: 3px">删除</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--问卷状态等信息-->
+        <div style="background: #e6f0fa;font-size: 12px; color: grey;margin-top: 10px; padding: 10px 30px 15px 30px;display: flex">
+            <div style="text-align: left;">
+                <i class="{{manage.allSheetType[value.type].fontIcon}}" style="vertical-align: middle;font-size: 20px; color: {{manage.allSheetType[value.type].color}}"></i>
+                <span style="margin-left: 10px; vertical-align: middle; font-size: 14px">创建者：{{value.account}}</span>
+            </div>
+            <div style="flex: 1; text-align: right">
+                <span style="margin-right: 18px" ng-if="value.status==1">草稿</span>
+                <span class="publishConfig" style="margin-right: 18px; color: white; cursor: pointer;border-radius: 10px; padding: 4px 12px" ng-if="value.status==2"
+                    ng-click="manage.initSheetPublishConfig($index)">
+                    <i class="fa fa-gear"></i>
+                    <span style="margin-left: 2px">发布设置</span>
+                </span>
+                <span style="margin-right: 18px; color: #ff7b15" ng-if="value.status==2">发布中</span>
+                <span>{{manage.parseSheetTime(value.timestamp)}}</span>
+            </div>
+        </div>
+    </div>
+
+    <!--占位符-->
+    <div style="width: 100%; height: 70px"></div>
+</div>

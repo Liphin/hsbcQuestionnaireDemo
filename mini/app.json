@@ -1,0 +1,39 @@
+{
+  "pages": [
+    "pages/sheet/sheet",
+    "pages/statistics/statistics",
+    "pages/mine/mine",
+    "pages/statistics/result/result",
+    "pages/mine/history/history",
+    "pages/try/try"
+  ],
+  "tabBar": {
+    "backgroundColor": "#ffffff",
+    "color": "#808080",
+    "selectedColor": "#1296db",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/statistics/statistics",
+        "text": "统计",
+        "iconPath": "/resource/statistics.png",
+        "selectedIconPath": "/resource/statistics_hover.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "/resource/mine.png",
+        "selectedIconPath": "/resource/mine_hover.png"
+      }
+    ]
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "backgroundColorTop": "#ffffff",
+    "backgroundColorBottom": "#ffffff",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "Liphin问卷",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,13 @@
+<!--单项填空体，文本详情描述题-->
+<div ng-if="manage.resultData.sheetClassify.fill_single.indexOf(value.type)>-1">
+    <div style="margin: 50px 0;">
+        <div style="padding: 10px 0; font-size: 15px">
+            <span style="font-weight: bold">第{{manage.getQuestionnaireNum($index)}}题：</span>
+            <span>{{value.data.title}}</span>
+        </div>
+        <div>
+            <button class="btn btn-info" ng-click="manage.viewFillResultDetail($index)"
+                    style="outline: none;padding: 5px 22px;">查看详细信息</button>
+        </div>
+    </div>
+</div>

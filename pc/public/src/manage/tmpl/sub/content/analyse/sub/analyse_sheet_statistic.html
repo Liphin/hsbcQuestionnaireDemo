@@ -1,0 +1,55 @@
+<!--问卷信息统计-->
+<div ng-if="manage.analyseData.type=='sheet'"
+     style="display: flex;padding: 20px 0 0 0;flex-direction: row;width: 100%">
+    <div style="flex: 1">
+        <!--所有问卷类型占比——饼状图-->
+        <div ng-if="manage.analyseData.statistic.sheet.item=='type'">
+            <sheet-statistic-type sheet-data={{manage.analyseData.statistic.sheet.data}}
+                                  style="width: 100%; display: flex; justify-content: center"></sheet-statistic-type>
+        </div>
+
+        <!--问卷发布数目——时间折线图，以年为计数单位-->
+        <div ng-if="manage.analyseData.statistic.sheet.item=='time'">
+            <sheet-statistic-time time-data={{manage.analyseData.statistic.sheet.data}}
+                                  style="width: 100%; display: flex; justify-content: center"></sheet-statistic-time>
+        </div>
+
+        <!--选择目标分析变量-->
+        <div ng-if="manage.analyseData.statistic.sheet.data.length>0"
+             style="margin: 45px 0 30px 20px;width: 100%; display: flex; justify-content: center">
+            <div>
+                <span style="color: #19626b; font-size: 16px">分析变量选择：</span>
+                <!--饼状图-->
+                <label class="radio-inline" style="margin-left: 20px">
+                    <input type="radio"
+                           ng-change="manage.changeNavigation('manage/analyseData?type=sheet&item=type')"
+                           ng-model="manage.analyseData.statistic.sheet.item" value="type">
+                    <span>问卷类型 </span><i class="fa fa-pie-chart" style="color: #ff5500"></i>
+                </label>
+
+                <!--折线图-->
+                <label class="radio-inline" style="margin-left: 20px">
+                    <input type="radio"
+                           ng-change="manage.changeNavigation('manage/analyseData?type=sheet&item=time')"
+                           ng-model="manage.analyseData.statistic.sheet.item" value="time">
+                    <span>创建时间 </span><i class="fa fa-line-chart" style="color: #1d94ed"></i>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <!--右侧数据类型选择-->
+    <div style="width: 300px;margin: 20px 0;">
+        <!--数据分析图选择-->
+        <div style="width: 250px">
+            <div><span style="color: #1c70af; font-size: 16px">数据源</span></div>
+            <div style="cursor: pointer;margin-top: 10px">
+                <div ng-repeat="(key, value) in manage.analyseData.statistic"
+                     ng-click="manage.changeNavigation('manage/analyseData?type='+key+'&item='+value.item)"
+                     style="padding: 10px;" ng-class="{'manageItemSelected':key==manage.analyseData.type}">
+                    <span>{{value.name}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

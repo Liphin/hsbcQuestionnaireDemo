@@ -1,0 +1,33 @@
+<!--单项选择题-->
+<div ng-if="value.type=='single_select'" id="widget_{{$index}}">
+    <div style="font-weight: bold">
+        <!--设置必答非必答题目效果-->
+        <i class="fa fa-star" style="color: #ff6525;font-size: 12px; margin-right: 5px" ng-if="value.data.required"></i>
+        <!--题目序号和标题-->
+        <span>{{design.getQuestionnaireNum($index)}}、{{value.data.title}}</span>
+    </div>
+    <div style="border: 1px solid gainsboro; border-radius: 7px;margin-top: 10px">
+        <div ng-repeat="subValue in value.data.option track by $index" style="border: 1px solid gainsboro; border-width: 1px 0 0 0;">
+            <label style="width: 100%; padding: 5px 12px 10px 12px; margin-bottom: 0">
+                <input type="radio" ng-model="value.data.selected" value="{{$index}}" ng-disabled="design.isDisabled">
+                <span style="font-weight: normal">{{subValue.text}}</span>
+            </label>
+        </div>
+        <!--其他选项设置-->
+        <div ng-if="value.data.cusFill.status" style="border: 1px solid gainsboro; border-width: 1px 0 0 0;">
+            <label style="width: 100%; padding: 5px 12px 10px 12px; margin-bottom: 0;">
+                <!--其他选项-->
+                <div>
+                    <input type="radio" ng-model="value.data.selected" value="other" ng-disabled="design.isDisabled">
+                    <span style="font-weight: normal">其他</span>
+                </div>
+                <!--文本框填空-->
+                <div style="width: 100%; display: flex">
+                    <input ng-if="value.data.selected=='other'" type="text" ng-model="value.data.cusFill.text" style="flex: 1; margin: 5px 0 0 5px;
+                        border: 1px solid darkgrey; border-width: 0 0 1px 0; outline: none; padding: 3px 12px; height: 30px; font-weight: normal"/>
+                </div>
+            </label>
+        </div>
+    </div>
+</div>
+

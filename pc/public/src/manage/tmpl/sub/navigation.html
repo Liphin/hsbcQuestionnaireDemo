@@ -1,0 +1,44 @@
+<style>
+    .navigationItem:hover {
+        background: #788ea5d6;
+    }
+
+    .itemTrigger {
+        background: rgba(239, 171, 103, 0.83);
+    }
+</style>
+
+<div style="position: fixed;z-index: 10; top: 0; left: 0; bottom: 0; width: 160px; padding: 50px 0 0 0; background: #415c7b">
+    <div class="navigationItem" ng-class="{'itemTrigger':manage.overallData.navigation=='createSheet'}"
+         ng-click="manage.changeNavigation('/manage/createSheet')"
+         style="cursor: pointer;color: white; font-size: 15px; padding: 12px 0 12px 20px;">
+        <i class="fa fa-edit"></i>
+        <span style="margin-left: 12px; position: relative; left: 1px">新建问卷</span>
+    </div>
+    <div class="navigationItem" ng-class="{'itemTrigger':manage.overallData.navigation=='allSheet'}"
+         ng-click="manage.changeNavigation('/manage/allSheet')"
+         style="cursor: pointer;color: white; font-size: 15px; padding: 12px 0 12px 20px;">
+        <i class="fa fa-file-text-o"></i>
+        <span style="margin-left: 12px; position: relative; left: 3px;">所有问卷</span>
+    </div>
+    <div class="navigationItem" ng-class="{'itemTrigger':manage.overallData.navigation=='resultStatistic'}"
+         ng-click="manage.changeNavigation('/manage/resultStatistic')"
+         style="cursor: pointer;color: white; font-size: 15px; padding: 12px 0 12px 20px;">
+        <i class="fa fa-table"></i>
+        <span style="margin-left: 14px">结果统计</span>
+    </div>
+    <div ng-if="overallData.user.right==2" class="navigationItem"
+         ng-class="{'itemTrigger':manage.overallData.navigation=='analyseData'}"
+         ng-click="manage.changeNavigation('/manage/analyseData')"
+         style="cursor: pointer;color: white; font-size: 15px; padding: 12px 0 12px 20px;">
+        <i class="fa fa-bar-chart"></i>
+        <span style="margin-left: 12px">数据分析</span>
+    </div>
+    <div ng-if="overallData.user.right==2" class="navigationItem"
+         ng-class="{'itemTrigger':manage.overallData.navigation=='rightSetting'}"
+         ng-click="manage.changeNavigation('/manage/rightSetting')"
+         style="cursor: pointer;color: white; font-size: 15px; padding: 12px 0 12px 20px;">
+        <i class="fa fa-check"></i>
+        <span style="margin-left: 12px">权限设置</span>
+    </div>
+</div>

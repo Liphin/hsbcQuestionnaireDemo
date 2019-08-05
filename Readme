@@ -1,0 +1,17 @@
+1、mini文件夹包含小程序端代码； pc文件夹包含客户端的前端和后台代码，同时小程序端后台接口也在pc包的服务端中
+2、项目启动前需进行相关配置
+    mini小程序配置
+        a. mini/project.config.json文件配置目标小程序的appid
+        b. mini/utils/data.js 文件配置baseUrl，为小程序的服务端url，同时该url需在微信小程序官网管理者平台配置白名单上添加（提示：必须为https请求类型）
+
+    pc相关配置
+        c. pc/server/db/mongo.js 配置mongodb数据库源地址；由于题目灵活扩展性需求，故本项目采用mongodb数据库存储题目信息
+        d. pc/server/config 文件夹下有不同文件夹配置信息，是根据本机的 TARGET_ENV 环境变量值路由到对应文件夹加载，故能在不同开发环境中自定义和更好团队协作
+           其中TARGET_ENV在pc/server/server.js中加载
+        e. pc/server/config/(对应TARGET_ENV)/setting.js 里面配置服务启动相关信息
+            ==> settingData/basePath 是该前端文件存放位置
+            ==> settingData/domainName 是该机器的对外路由地址
+            ==> settingData/frontPort 客户端服务访问端口地址
+            ==> certConfig 指定存放cert地方，由于小程序需要https协议才能启动
+            ==> appConfig 需配置appid和secret两个字符串，分别为小程序的appid和secret
+            ==> allowedOrigin 异源访问白名单配置

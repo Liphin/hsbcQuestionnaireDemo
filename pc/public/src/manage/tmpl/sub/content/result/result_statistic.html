@@ -1,0 +1,29 @@
+<!--数据统计与分析-->
+<div id="resultStatistic" ng-if="manage.overallData.navigation=='resultStatistic'" class="scrollBar-7"
+     style="padding: 10px 0 0 50px;position: fixed;top: 50px; left: 160px; background: white; right: 0; bottom: 0; overflow-y:auto">
+    <!--针对某个表单数据进行统计分析-->
+    <div style="display: flex; flex-direction: row">
+        <div style="flex: 1.5"></div>
+        <div id="resultStatisticContent" style="flex: 7">
+            <div ng-repeat="value in manage.allSheetData[manage.resultData.sheetIndex].sheet track by $index">
+                <!--段落-->
+                <result-paragraph></result-paragraph>
+
+                <!--选择题-->
+                <result-select></result-select>
+
+                <!--矩阵题-->
+                <result-matrix></result-matrix>
+
+                <!--单项填空题-->
+                <result-fill-single></result-fill-single>
+
+                <!--多项填空题-->
+                <result-fill-matrix></result-fill-matrix>
+            </div>
+        </div>
+        <div style="flex: 1.5"></div>
+    </div>
+    <!--占位符-->
+    <div style="width: 100%; height: 70px"></div>
+</div>

@@ -1,0 +1,87 @@
+<!--单项选择题-->
+<div ng-if="design.sheet[design.overallData.editRenderIndex]['type']=='single_select'"
+     style="padding: 20px 0 0 50px; font-size: 15px">
+    <!--相关设置-->
+    <div>
+        <!--必答题设置-->
+        <div style="border: 1px solid gainsboro;border-radius: 5px; padding: 15px; width: 400px">
+            <span style="font-weight: bold; color: #3376ab; font-size: 16px">必答题：</span>
+            <label>
+                <input type="radio" ng-value="true"
+                       ng-model="design.sheet[design.overallData.editRenderIndex]['data']['required']"/>
+                <span style="font-weight: normal">必答</span>
+            </label>
+            <label style="margin-left: 10px">
+                <input type="radio" ng-value="false"
+                       ng-model="design.sheet[design.overallData.editRenderIndex]['data']['required']"/>
+                <span style="font-weight: normal">非必答</span>
+            </label>
+        </div>
+    </div>
+
+
+    <!--题干信息输入描述-->
+    <div style="margin-top: 20px; border: 1px solid gainsboro;border-radius: 5px; padding: 15px;width: 400px">
+        <span style="vertical-align: top;font-weight: bold; color: #3376ab;font-size: 16px">题干：</span>
+        <textarea placeholder="请输入题干信息" ng-model="design.sheet[design.overallData.editRenderIndex]['data']['title']"
+                  style="border-color: gainsboro; display: block;vertical-align: top; width: 370px; height: 100px; margin-top: 7px; outline: none; padding: 7px"></textarea>
+    </div>
+
+
+    <!--选项操作-->
+    <div style="margin-top: 20px; border: 1px solid gainsboro;border-radius: 5px; padding: 15px;width: 400px">
+        <div style="display: flex;">
+            <!--选项展开合并-->
+            <div>
+                <span style="font-weight: bold; color: #3376ab;font-size: 16px">选项：</span>
+            </div>
+            <!--添加新的选项操作-->
+            <div ng-click="design.addOption('option')"
+                 style="border: 1px solid #d0d0d0; border-radius: 5px; padding: 3px 12px;margin-left: 23px; font-size: 13px; cursor: pointer; position: relative; top: -3px">
+                <span style="">添加</span>
+                <i class="fa fa-plus" style="position: relative; top: 1px; left: 3px"></i>
+            </div>
+        </div>
+
+        <!--每个选项展示-->
+        <div>
+            <div style="margin: 5px 0; background: #efefef;padding: 3px ; display: inline-block">
+                <span>选项文字</span>
+                <span style="margin-left: 164px">默认</span>
+                <span>上移</span>
+                <span>下移</span>
+                <span>删除</span>
+            </div>
+            <div ng-repeat="value in design.sheet[design.overallData.editRenderIndex]['data']['option'] track by $index "
+                 style="margin: 5px 0 10px 0">
+                <input type="text" ng-model="value['text']"
+                       style="border: 1px solid gainsboro;width: 220px; outline: none;padding: 3px 12px; font-size: 14px"/>
+                <div style="margin-left: 14px; color: #9a9a9a; font-size: 18px; display: inline-block">
+                    <i ng-click="design.setAsDefault($index,'option')" style="cursor: pointer;" title="默认选中状态"
+                       ng-class="{'fa fa-check-circle-o':design.sheet[design.overallData.editRenderIndex].data.selected==$index,'fa fa-circle-o':design.sheet[design.overallData.editRenderIndex].data.selected!=$index}"></i>
+                    <i ng-click="design.positionUp($index,'option')" class="fa fa-arrow-circle-o-up"
+                       style="margin-left: 14px;cursor: pointer" title="选项上移"></i>
+                    <i ng-click="design.positionDown($index,'option')" class="fa fa-arrow-circle-o-down"
+                       style="margin-left: 14px;cursor: pointer" title="选项下移"></i>
+                    <i ng-click="design.deleteOption($index,'option')" class="fa fa-trash"
+                       style="margin-left: 14px;cursor: pointer" title="删除"></i>
+                </div>
+            </div>
+        </div>
+
+        <!--设置其他选项，用户自定义填空-->
+        <div style="margin-top: 20px">
+            <span style="font-weight: bold; color: #3376ab;">其他选项：</span>
+            <label>
+                <input type="radio" ng-value="true"
+                       ng-model="design.sheet[design.overallData.editRenderIndex].data.cusFill.status"/>
+                <span style="font-weight: normal">添加</span>
+            </label>
+            <label style="margin-left: 10px">
+                <input type="radio" ng-value="false"
+                       ng-model="design.sheet[design.overallData.editRenderIndex].data.cusFill.status"/>
+                <span style="font-weight: normal">不添加</span>
+            </label>
+        </div>
+    </div>
+</div>

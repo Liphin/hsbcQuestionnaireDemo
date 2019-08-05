@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="sheet">
+<head>
+    <link rel="stylesheet" href="/public/assets/css/bootstrap/bootstrap.min.css" media="none" onload="if(media!='all')media='all'">
+    <script src="/public/assets/js/jquery/jquery-1.11.0.js"></script>
+    <script src="/public/assets/js/bootstrap/bootstrap.min.js"></script>
+    <script src="/public/assets/js/angularjs/angular.js"></script>
+    <meta charset="UTF-8">
+    <title>__TITLE__</title>
+    <meta name="viewport" content="width=device-width">
+</head>
+<body ng-controller="designCtrl as design" style="display: flex;flex-direction: row; font-family: 微软雅黑">
+<div style="flex: 1"></div>
+<div style="flex: 8; margin: 20px 0 50px 0">
+
+    <div ng-repeat="value in design.sheet track by $index">
+        <div ng-if="value.type=='matrix_multi_select'">
+            <div style="font-weight: bold">{{design.getQuestionnaireNum($index)}}、{{value.data.title}}</div>
+            <table class="table" style="margin-top: 10px">
+                <thead>
+                <tr>
+                    <th style="border: none;"></th>
+                    <th ng-repeat="radioValue in value.data.option" style="font-weight: normal; border: none;text-align: center">{{radioValue.text}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="subValue in value.data.choice">
+                    <td style="font-weight: bold">{{subValue.text}}</td>
+                    <td ng-repeat="radioValue in value.data.option track by $index" style="padding: 0">
+                        <label style="width: 100%; text-align: center; padding: 8px">
+                            <input type="checkbox" ng-model="subValue.selected[$index]"/>
+                        </label>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <!--提交按钮-->
+    <div style="margin-top: 40px">
+        <button ng-click="design.submitSheet()" style="font-family: 微软雅黑;outline: none; width: 100%; padding: 9px; font-size: 16px; border: none;border-radius: 7px;color: white; background: #4eb3eb">提交</button>
+    </div>
+</div>
+<div style="flex: 1"></div>
+
+<script>
+    "use strict";
+    let sheetModule = angular.module('sheet', []);
+    sheetModule.controller('designCtrl', function() {
+        let design = this;
+        design.sheet = [
+            {
+                type: 'matrix_multi_select',
+                data: {
+                    required: true,
+                    title: '这里输入题干信息',
+                    option: [
+                        {text: '极差'},
+                        {text: '不满'},
+                        {text: '一般'},
+                        {text: '满意'},
+                        {text: '极好'},
+                    ],
+                    choice: [
+                        {
+                            text: '外观',
+                            selected: [],
+                        },
+                        {
+                            text: '功能',
+                            selected: [],
+                        },
+                    ]
+                }
+            }
+        ];
+        
+        //提交问卷
+        design.submitSheet= function () {
+            console.log(design.sheet)
+        }
+    });
+</script>
+</body>
+</html>

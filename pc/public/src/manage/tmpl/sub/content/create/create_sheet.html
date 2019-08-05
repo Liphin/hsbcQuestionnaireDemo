@@ -1,0 +1,33 @@
+<!--创建新的表单数据-->
+<div ng-if="manage.overallData.navigation=='createSheet'" align="center" >
+    <div style="padding: 30px 0;width: 700px;background: white; margin-top: 15px; box-shadow: 0 0 5px gainsboro; height: {{overallData.screen.height-60}}px">
+
+        <!--问卷标题-->
+        <div style="text-align: left; padding: 0 60px; font-size: 17px; display: flex; align-items: center">
+            <span style="color: #7a96b5; font-weight: bold">标题</span>
+            <input ng-model="manage.overallData.newSheet.title"
+                    style="border: 1px solid gainsboro; border-width: 0 0 1px 0; outline: none; margin-left: 10px; flex: 1; padding: 5px 10px; font-size: 15px"/>
+        </div>
+
+        <!--问卷类型-->
+        <div>
+            <!--<div style="text-align: left; padding: 0 60px; font-size: 17px; margin-top: 20px; font-weight: bold; color: #7a96b5">类型</div>-->
+            <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; margin-top: 20px;">
+                <div class="sheetType" ng-repeat="value in manage.allSheetType" sheet-type-frame="{{value.color}}"
+                     style="margin: 20px 25px;color: {{value.color}};box-shadow: 0 0 5px {{value.color}};border-radius: 10px">
+                    <div style="height: 100px; width: 100%; display: flex; flex-direction: row; padding: 20px">
+                        <i class="{{value.fontIcon}}" style="font-size: 50px"></i>
+                        <div style="width: 150px; text-align: left; margin-left: 20px">
+                            <div style="font-size: 22px">{{value.name}}</div>
+                            <div style="margin-top: 10px">{{value.depict}}</div>
+                        </div>
+                    </div>
+                    <div style="width: 100%; text-align: center; border-width: 1px 0 0 0;border-style: solid; margin-top: 30px; padding: 14px">
+                        <div sheet-type-btn="{{value.color}}" style="cursor: pointer;border-width: 1px;border-style: solid; border-radius: 5px; padding: 6px 30px; display: inline-block"
+                             ng-click="manage.createNewSheet(value.type)">创建</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

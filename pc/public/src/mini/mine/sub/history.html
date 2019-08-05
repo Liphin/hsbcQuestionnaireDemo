@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="sheet">
+<head>
+    <link rel="stylesheet" href="/public/assets/css/bootstrap/bootstrap.min.css">
+    <script src="/public/assets/js/jquery/jquery-1.11.0.js"></script>
+    <script src="/public/assets/js/bootstrap/bootstrap.min.js"></script>
+    <script src="/public/assets/js/angularjs/angular.js"></script>
+    <meta charset="UTF-8">
+    <title>我的历史表单信息</title>
+    <meta name="viewport" content="width=device-width">
+</head>
+<style>
+
+</style>
+<body ng-controller="designCtrl as design" style=" font-family: 微软雅黑">
+
+<!--Loading动画-->
+<div ng-if="design.loading" ng-include="'/src/overall/tmpl/sub/loadAnimate.html'"></div>
+
+<div style="display: flex;flex-direction: row;">
+    <div style="flex: 1"></div>
+    <div style="flex: 8; margin: 20px 0 50px 0">
+
+        <div ng-repeat="value in design.sheet track by $index">
+            <!--占位空间-->
+            <div style="width: 100%;height: 20px"></div>
+
+            <div>
+                <!------------------------ OUTLINE -------------------------->
+                <div ng-include="'/src/design/tmpl/sub/render/paragraph.html'"></div> <!--内容-->
+
+                <!------------------------ OUTLINE -------------------------->
+                <div ng-include="'/src/design/tmpl/sub/render/single_select.html'"></div> <!--单选题-->
+                <div ng-include="'/src/design/tmpl/sub/render/single_scale.html'"></div> <!--量表题-->
+                <div ng-include="'/src/design/tmpl/sub/render/matrix_single_select.html'"></div> <!--矩阵单选-->
+                <div ng-include="'/src/design/tmpl/sub/render/matrix_single_scale.html'"></div> <!--矩阵量表-->
+                <div ng-include="'/src/design/tmpl/sub/render/pull_single_select.html'"></div> <!--下拉单选-->
+
+                <!------------------------ OUTLINE -------------------------->
+                <div ng-include="'/src/design/tmpl/sub/render/multi_select.html'"></div> <!--多选题-->
+                <div ng-include="'/src/design/tmpl/sub/render/matrix_multi_select.html'"></div> <!--矩阵多选-->
+
+                <!------------------------ OUTLINE -------------------------->
+                <div ng-include="'/src/design/tmpl/sub/render/single_fill.html'"></div> <!--单项填空-->
+                <div ng-include="'/src/design/tmpl/sub/render/matrix_fill.html'"></div> <!--矩阵填空-->
+                <div ng-include="'/src/design/tmpl/sub/render/detail_fill.html'"></div> <!--详情填写-->
+            </div>
+
+            <!--占位空间-->
+            <div style="width: 100%;height: 20px"></div>
+        </div>
+    </div>
+    <div style="flex: 1"></div>
+</div>
+
+<!--占位符-->
+<div style="width: 100%; height: 30px"></div>
+
+<script>
+    "use strict";
+
+    /**
+     * 获取网页url参数
+     */
+    let getUrlParameter = function getUrlParameter(sParam) {
+        let sPageURL = window.location.search.substring(1),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName, i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+            }
+        }
+    };
+
+
+    //****************************** AngularJs ********************************
+    let sheetModule = angular.module('sheet', []);
+    sheetModule.controller('designCtrl', function ($http) {
+        //1、数据初始化
+        let design = this;
+        design.sheet = [];
+        design.loading = true;
+        design.isDisabled = true; //禁用组件响应事件
+
+        //2、获取指定表单页面参数
+        let _id = getUrlParameter("_id");
+        //http获取目标页面表单原始数据的和问卷结果
+        if (_id != undefined && _id != false && _id != null) {
+            $http.post("/getTargetParticipant", {_id: _id}).success(function (result) {
+                if (result.status == 200) {
+                    let data = result.data;
+                    //填充表单sheet内容数据
+                    for (let i in data.sheet) {
+                        design.sheet[i] = data.sheet[i];
+                    }
+                }
+                //数据获取失败
+                else {
+                    alert("很抱歉，系统出错，请稍后重试");
+                }
+            }).error(function (err) {
+                alert("很抱歉，系统出错，请稍后重试");
+
+            }).finally(function () {
+                design.loading = false;
+            });
+        }
+
+
+        /**
+         * 获取某问题的序号
+         * @returns {number}
+         */
+        design.getQuestionnaireNum = function (index) {
+            //遍历问题表单到index前的每个选项，去除所有为paragraph类型的数据
+            let paraNum = 0;
+            for (let i = 0; i < index; i++) {
+                if (design.sheet[i].type == 'paragraph') {
+                    paraNum++;
+                }
+            }
+            return index - paraNum + 1; //从1开始
+        };
+    });
+
+    /**
+     * 渲染表单中段落信息展现
+     */
+    sheetModule.directive('designParagraphHtml', [function () {
+        return {
+            restrict: 'A',
+            scope: {
+                designParagraphHtml: '@',
+            },
+            link: function (scope, ele, attrs) {
+                scope.$watch('designParagraphHtml', function (newValue, oldValue) {
+                    if (newValue && newValue != '') {
+                        ele.html(newValue);
+                    }
+                });
+            }
+        };
+    }]);
+</script>
+</body>
+</html>

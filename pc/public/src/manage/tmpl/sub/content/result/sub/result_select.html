@@ -1,0 +1,55 @@
+<!--选择题：包括单选、多选等-->
+<div ng-if="manage.resultData.sheetClassify.select.indexOf(value.type)>-1">
+    <div style="margin: 50px 0;">
+        <div style="padding: 10px 0; font-size: 15px">
+            <span style="font-weight: bold">第{{manage.getQuestionnaireNum($index)}}题：</span>
+            <span>{{value.data.title}}</span>
+        </div>
+        <table class="table table-striped table-hover" style="text-align: center;border: 1px solid gainsboro;">
+            <thead>
+            <tr>
+                <th style="width: 250px; text-align: center">选项</th>
+                <th style="width: 70px; text-align: center">小计</th>
+                <th style="width: 250px; text-align: center">比例</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--一般选项-->
+            <tr ng-repeat="tdValue in value.data.option track by $index">
+                <td>{{tdValue.text}}</td>
+                <td>{{manage.getStatisticNum('selectMinCount', manage.resultData.result[value.timestamp][$index])}}</td>
+                <td>
+                    <div>
+                        <div class="progress"
+                             style="width: 150px; display: inline-block; margin-bottom: 0; vertical-align: middle; height: 12px; margin-right: 10px">
+                            <div class="progress-bar progress-bar-info" role="progressbar"
+                                 style="position: relative; z-index: 5;height: 12px;width: {{manage.getStatisticNum('selectPercent',manage.resultData.result[value.timestamp][$index],
+                              manage.resultData.result[value.timestamp])}}%;"></div>
+                        </div>
+                        <div style="width: 60px;display: inline-block; vertical-align: middle">
+                            {{manage.getStatisticNum('selectPercent',
+                            manage.resultData.result[value.timestamp][$index],
+                            manage.resultData.result[value.timestamp])}}%
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <!--其他选项-->
+            <tr ng-if="manage.resultData.result[value.timestamp].hasOwnProperty('other')">
+                <td>其他</td>
+                <td>{{manage.resultData.result[value.timestamp].other.length}}</td>
+                <td>
+                    <button ng-if="manage.device!='mobile'" class="btn btn-info" ng-click="manage.viewFillResultDetail($index)"
+                            style="outline: none;padding: 5px 22px;">查看详细信息
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>总计</td>
+                <td><span>{{manage.getStatisticNum('selectSum', manage.resultData.result[value.timestamp])}}</span></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<!--单项选择题-->
+<div ng-if="design.sheet[design.overallData.editRenderIndex]['type']=='single_fill'"
+     style="padding: 20px 0 0 50px; font-size: 15px">
+    <!--相关设置-->
+    <div>
+        <!--必答题设置-->
+        <div style="border: 1px solid gainsboro;border-radius: 5px; padding: 15px; width: 400px">
+            <span style="font-weight: bold; color: #3376ab; font-size: 16px">必答题：</span>
+            <label>
+                <input type="radio" ng-value="true"
+                       ng-model="design.sheet[design.overallData.editRenderIndex]['data']['required']"/>
+                <span style="font-weight: normal">必答</span>
+            </label>
+            <label style="margin-left: 10px">
+                <input type="radio" ng-value="false"
+                       ng-model="design.sheet[design.overallData.editRenderIndex]['data']['required']"/>
+                <span style="font-weight: normal">非必答</span>
+            </label>
+        </div>
+    </div>
+
+
+    <!--题干信息输入描述-->
+    <div style="margin-top: 20px; border: 1px solid gainsboro;border-radius: 5px; padding: 15px;width: 400px">
+        <span style="vertical-align: top;font-weight: bold; color: #3376ab;font-size: 16px">题干：</span>
+        <textarea placeholder="请输入题干信息" ng-model="design.sheet[design.overallData.editRenderIndex]['data']['title']"
+                  style="border-color: gainsboro; display: block;vertical-align: top; width: 370px; height: 100px; margin-top: 7px; outline: none; padding: 7px"></textarea>
+    </div>
+
+</div>

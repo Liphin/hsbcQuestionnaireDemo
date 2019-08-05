@@ -1,0 +1,62 @@
+<style>
+    .previewBtn{
+        background: #4eb4ed;
+        border-color: #4eb4ed;
+    }
+    .previewBtn:hover{
+        background: #3c91c1;
+        border-color: #3c91c1;
+    }
+</style>
+
+<!--编辑页面头部-->
+<div style="position: fixed; top: 0; left: 0; right: 0;height: 50px;z-index: 1000;background: white; box-shadow: 2px 0 5px #adadad; text-align: right">
+    <!--发布按钮-->
+    <div ng-click="design.publishPage(2)"
+         style="vertical-align: top; cursor: pointer; display: inline-block; padding: 5px 20px; border: 1px solid gainsboro; margin: 9px 10px  20px 9px ">
+        发布
+    </div>
+
+    <!--预览按钮-->
+    <!--<div class="btn-group" style="cursor: pointer; display: inline-block; vertical-align: top;color: white;margin: 9px 10px  20px 9px" >-->
+        <!--<div style="display: flex; justify-content: center; align-items: center">-->
+            <!--<div class="previewBtn" ng-click="design.viewPage()" style="border-width: 1px;border-style: solid;padding: 5px 8px 5px 18px; display: inline-block">预览</div>-->
+            <!--<div title="设置" style="border-width: 1px;border-style: solid;display: inline-block; padding: 8px 15px 8px 9px;" class="fa fa-cog dropdown-toggle noselect previewBtn" data-toggle="dropdown"></div>-->
+
+            <!--&lt;!&ndash;点击设置后下拉菜单&ndash;&gt;-->
+            <!--<div class="dropdown-menu" style="min-width: 102px;margin-left: -2px">-->
+                <!--<div ng-click="design.viewPage('phoneView')" class="header"-->
+                     <!--style="padding: 6px 12px;width: 100%;height: 33px;display: inline-block;color: grey;" >-->
+                    <!--<span style="margin-left: 5px;">快速预览</span>-->
+                    <!--<div class="fa fa-check" ng-if="design.overallData.viewType=='phoneView'"-->
+                         <!--style="color: #4eb4ed;right: 0; float: right; position: absolute; top: 0; font-size: 16px; padding: 13px 15px 9px 10px;z-index: 5"></div>-->
+                <!--</div>-->
+                <!--<div ng-click="design.viewPage('miniView')" class="header"-->
+                     <!--style="position: relative;padding: 6px 12px;width: 132px;height: 33px;display: inline-block;color: grey;border: 1px solid #d3d3d3;border-width: 1px 0 0 0">-->
+                    <!--<span style="margin-left: 5px;">小程序预览</span>-->
+                    <!--<i class="fa fa-check" ng-if="design.overallData.viewType=='miniView'"-->
+                       <!--style="color: #4eb4ed;right: 0; float: right; position: absolute; top: -5px; font-size: 16px; padding: 13px 15px 9px 10px;z-index: 5"></i>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="btn-group" style="cursor: pointer; display: inline-block; vertical-align: top;color: white;margin: 9px 10px  20px 9px" >-->
+        <!--<div class="previewBtn" ng-click="design.viewPage()" style="border-width: 1px;border-style: solid;padding: 5px 8px 5px 18px; display: inline-block">预览</div>-->
+    <!--</div>-->
+    <div ng-click="design.viewPage()"
+         style="background: #4eb4ed;color: white;vertical-align: top; cursor: pointer; display: inline-block; padding: 5px 20px; border: 1px solid #4eb4ed; margin: 9px 10px  20px 9px ">
+        预览
+    </div>
+
+    <!--保存按钮-->
+    <div ng-click="design.savePage()"
+         style="vertical-align: top; cursor: pointer; display: inline-block; padding: 5px 20px; border: 1px solid gainsboro; margin: 9px 10px  20px 9px ">
+        保存
+    </div>
+
+    <!--返回按钮-->
+    <div ng-click="design.backToManage()" style="vertical-align: top; cursor: pointer; display: inline-block; padding: 5px 20px; border: 1px solid gainsboro;margin: 9px 20px  20px 9px; ">
+        返回
+    </div>
+
+</div>

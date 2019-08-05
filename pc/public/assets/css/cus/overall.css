@@ -1,0 +1,306 @@
+/*模态框的设置*/
+body {
+    padding-right: 0px !important;
+}
+
+*.modal-open {
+    overflow-y: scroll;
+    padding-right: 0 !important;
+}
+
+.leftItemSelected {
+    background: rgba(239, 172, 103, 0.83);
+}
+
+/*以下是ScrollBar的样式设置*/
+/**  STYLE 1 */
+/*滚动条的滚动区域颜色*/
+.scrollBar-1::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: rgb(192, 209, 253);
+}
+
+/*滚动条凹槽颜色*/
+.scrollBar-1::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+.scrollBar-1::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background-color: #F5F5F5;
+}
+
+/** STYLE 7 */
+.scrollBar-7::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #F5F5F5;
+    border-radius: 10px;
+}
+
+.scrollBar-7::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-image: -webkit-gradient(linear,
+    left top,
+    left bottom,
+    color-stop(0.44, rgba(122, 153, 217, 0.32)),
+    color-stop(0.72, rgba(73, 125, 189, 0.32)),
+    color-stop(0.86, rgba(28, 58, 148, 0.32)));
+}
+
+.scrollBar-7::-webkit-scrollbar {
+    width: 5px;
+    background-color: #F5F5F5;
+}
+
+/** STYLE 8 */
+.scrollBar-8::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #F5F5F5;
+    border-radius: 10px;
+}
+
+.scrollBar-8::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-image: -webkit-gradient(linear,
+    left top,
+    left bottom,
+    color-stop(0.44, rgba(144, 144, 144, 0.19)),
+    color-stop(0.72, rgba(144, 144, 144, 0.19)),
+    color-stop(0.86, rgba(144, 144, 144, 0.19)));
+}
+
+.scrollBar-8::-webkit-scrollbar {
+    width: 5px;
+    background-color: #F5F5F5;
+}
+
+.innerInlineDiv div {
+    display: inline-block;
+}
+
+.hoverUnderline:hover {
+    cursor: pointer;
+    color: rgb(53, 35, 63);
+    text-decoration: underline;
+}
+
+.deptChoose:hover {
+    background: #ffd7e0;
+}
+
+/**
+ 避免快速点击后变蓝
+ */
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                     supported by Chrome and Opera */
+}
+
+/*jquery拖动操作*/
+#sortable {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 450px;
+}
+
+#sortable li {
+    margin: 3px 3px 3px 0;
+    padding: 1px;
+    float: left;
+    width: 100px;
+    height: 90px;
+    font-size: 4em;
+    text-align: center;
+}
+
+/*记录闯关地图页面按钮颜色*/
+.buttonColorOk {
+    color: #ff8500;
+}
+
+.buttonColorOff {
+    color: grey;
+}
+
+/*end demo-specific*/
+.loader {
+    position: relative;
+    margin: 0 auto;
+    width: 70px;
+}
+
+.loader:before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+}
+
+.circular {
+    animation: rotate 2s linear infinite;
+    height: 100%;
+    transform-origin: center center;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.path {
+    stroke-dasharray: 50 10;
+    /*stroke-dashoffset: 100;*/
+    animation: dash 3s infinite linear, color 6s ease-in-out infinite;
+    /*animation: dash 2s ease-in-out infinite, color 8s ease-in-out infinite;*/
+    stroke-linecap: round;
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(180deg);
+    }
+}
+
+@keyframes dash {
+    to {
+        stroke-dashoffset: 500px;
+    }
+    /*0% {*/
+        /*stroke-dashoffset: 0;*/
+    /*}*/
+    /*50% {*/
+        /*stroke-dashoffset: -25px;*/
+    /*}*/
+    /*100% {*/
+        /*stroke-dashoffset: -25px;*/
+    /*}*/
+}
+
+@keyframes color {
+    100%,
+    0% {
+        stroke: #d62d20;
+    }
+    40% {
+        stroke: #0057e7;
+    }
+    66% {
+        stroke: #008744;
+    }
+    80% {
+        stroke: #5e4492;
+    }
+    90% {
+        stroke: #ffa700;
+    }
+}
+
+/*.path {*/
+/*stroke-dasharray: 1, 200;*/
+/*stroke-dashoffset: 100;*/
+/*animation: dash 1.5s infinite linear, color 4s ease-in-out infinite;*/
+/*!*animation: dash 1.5s ease-in-out infinite, color 4s ease-in-out infinite;*!*/
+/*stroke-linecap: round;*/
+/*}*/
+
+/*@keyframes dash {*/
+/*0% {*/
+/*stroke-dasharray: 1, 200;*/
+/*stroke-dashoffset: 0;*/
+/*}*/
+/*50% {*/
+/*stroke-dasharray: 89, 200;*/
+/*stroke-dashoffset: -35px;*/
+/*}*/
+/*100% {*/
+/*stroke-dasharray: 89, 200;*/
+/*stroke-dashoffset: -124px;*/
+/*}*/
+/*}*/
+
+
+.arbiEditLeft div {
+    height: 70px;
+    border: 1px solid lightgray;
+    border-width: 0 0 1px 0;
+    width: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+/*.arbiEditLeft div:hover{*/
+/*background: #e4f2f7;*/
+/*border-color: #e4f2f7;*/
+/*color: black;*/
+/*}*/
+
+.inputStyle {
+    outline: none;
+    padding: 4px 10px;
+    border: 1px solid #bdbdbd;
+    border-width: 0 0 1px 0;
+}
+
+.textAreaStyle {
+    outline: none;
+    padding: 4px 10px;
+    border: 1px solid #bdbdbd;
+}
+
+
+/*组件样式*/
+.widget i{
+    color: #4db5ef;
+}
+.widget:hover{
+    background: #4db5ef;
+    color: white;
+}
+.widget:hover i{
+    color: white;
+}
+
+
+/*编辑菜单鼠标放上去时样式变化*/
+.listOptMenu span:hover {
+    background: #78a1bf;
+    cursor: pointer;
+}
+
+.tableTrStyle td, .tableTrStyle th {
+    text-align: center;
+}
+
+.widgetChoose:hover {
+    border-color: #7bb0cc;
+    background: #7bb0cc;
+}
+
+.blueColor{
+    color: #3376ab;
+}
+
+/*导出按钮的头部*/
+.header {
+    background: white;
+}
+.header:hover {
+    background: #f7f7f9;
+}
+
+
+

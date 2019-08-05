@@ -1,0 +1,46 @@
+<!--查看单项填空题和多项填空题时填空数据-->
+<style>
+    .panelClose:hover {
+        color: #1d92ee;
+    }
+</style>
+<div ng-if="manage.overallData.fillResult.status" align="center"
+     style="background: rgba(93,93,94,0.55);position: fixed;top: 0;left: 0; right: 0; bottom: 0; width: 100%;
+        z-index: {{zIndexHelper.phoneView}};height: 100%; display: flex;justify-content: center; align-items: center">
+
+    <!--文本填空内容显示-->
+    <div style="width: 70%;max-width: 900px; height: 90%;max-height: 700px; background: white; display: flex;flex-direction: column; border-radius: 10px">
+        <div style="font-size: 20px; text-align: left">
+
+            <span style="position: relative; top: 25px;font-size: 15px; margin-left: 30px">
+                <span style="font-weight: bold;color: #5bbfdd">第{{manage.getQuestionnaireNum(manage.overallData.fillResult.index)}}题：</span>
+                <span>{{manage.overallData.fillResult.title}}</span>
+            </span>
+            <span class="panelClose"
+                  style="cursor: pointer;font-size: 30px; float: right; position: relative; right: 20px; top: 10px;"
+                  ng-click="manage.overallData.fillResult.status=false">&times;</span>
+        </div>
+
+        <div style="padding: 0 30px 30px 30px; flex: 1; overflow-y: auto; margin: 30px 0 0 0" class="scrollBar-7">
+            <table class="table table-striped table-hover" style="text-align: center;border: 1px solid gainsboro;">
+                <thead>
+                <tr>
+                    <th style="text-align: center">序号</th>
+                    <th style="text-align: center">内容</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="value in manage.overallData.fillResult.data track by $index">
+                    <td>
+                        <span style="">{{$index+1}}</span>
+                    </td>
+                    <td>
+                        <span>{{value}}</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

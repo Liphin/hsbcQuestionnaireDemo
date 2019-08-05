@@ -1,0 +1,78 @@
+<!--人次数统计-->
+<div ng-if="manage.analyseData.type=='person'"
+     style="display: flex;padding: 20px 0 0 0;flex-direction: row;width: 100%">
+    <div style="flex: 1">
+        <!--问卷参与者人次数——时间折线图，以年为计算单位-->
+        <div ng-if="manage.analyseData.statistic.person.item=='time'">
+            <person-statistic-time time-data={{manage.analyseData.statistic.person.data}}
+                                  style="width: 100%; display: flex; justify-content: center"></person-statistic-time>
+
+        </div>
+
+        <!--问卷热度排行榜-->
+        <div ng-if="manage.analyseData.statistic.person.item=='rank'" style="width: 100%; display: flex; justify-content: center">
+            <div style="width:750px; height:450px; overflow-y: auto;" class="scrollBar-7">
+                <table class="table table-hover" style="font-family: 微软雅黑;">
+                    <caption style="font-size: 17px; color: black; text-align: center; margin-bottom: 7px">2018年广外公派回国人员考察内容</caption>
+                    <thead>
+                    <tr style="font-size: 15px">
+                        <th>排位</th>
+                        <th>标题</th>
+                        <th>参与人数</th>
+                        <th>状态</th>
+                        <th>查阅统计</th>
+                    </tr>
+                    </thead>
+                    <tbody style="font-size: 15px">
+                    <tr style="" ng-repeat="value in manage.analyseData.statistic.person.append.rank | orderBy:'-num' track by $index">
+                        <td>{{$index+1}}</td>
+                        <td>{{value.title}}</td>
+                        <td>{{value.num}}</td>
+                        <td>{{value.status}}</td>
+                        <td><a href="#/manage/resultStatistic?_id={{value._id}}" style="text-decoration: none">查阅结果</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <!--选择目标分析变量-->
+        <div ng-if="manage.analyseData.statistic.person.data.length>0"
+             style="margin: 45px 0 30px 20px;width: 100%; display: flex; justify-content: center">
+            <div>
+                <span style="color: #19626b; font-size: 16px">分析变量选择：</span>
+                <!--折线图-->
+                <label class="radio-inline" style="margin-left: 20px">
+                    <input type="radio"
+                           ng-change="manage.changeNavigation('manage/analyseData?type=person&item=time')"
+                           ng-model="manage.analyseData.statistic.person.item" value="time">
+                    <span>参与人次数 </span><i class="fa fa-line-chart" style="color: #1d94ed"></i>
+                </label>
+
+                <!--折线图-->
+                <label class="radio-inline" style="margin-left: 20px">
+                    <input type="radio"
+                           ng-change="manage.changeNavigation('manage/analyseData?type=person&item=rank')"
+                           ng-model="manage.analyseData.statistic.person.item" value="rank">
+                    <span>热度排名</span><i class="fa fa-align-left" style="color: #ff5500"></i>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <!--右侧数据类型选择-->
+    <div style="width: 300px;margin: 20px 0;">
+        <!--数据分析图选择-->
+        <div style="width: 250px">
+            <div><span style="color: #1c70af; font-size: 16px">数据源</span></div>
+            <div style="cursor: pointer;margin-top: 10px">
+                <div ng-repeat="(key, value) in manage.analyseData.statistic"
+                     ng-click="manage.changeNavigation('manage/analyseData?type='+key+'&item='+value.item)"
+                     style="padding: 10px;" ng-class="{'manageItemSelected':key==manage.analyseData.type}">
+                    <span>{{value.name}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

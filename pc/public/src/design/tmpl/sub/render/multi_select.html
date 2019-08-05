@@ -1,0 +1,17 @@
+<!--多项选择题-->
+<div ng-if="value.type=='multi_select'" id="widget_{{$index}}">
+    <div style="font-weight: bold">
+        <!--设置必答非必答题目效果-->
+        <i class="fa fa-star" style="color: #ff6525;font-size: 12px; margin-right: 5px" ng-if="value.data.required"></i>
+        <!--题目序号和标题-->
+        <span>{{design.getQuestionnaireNum($index)}}、{{value.data.title}}</span>
+    </div>
+    <div style="border: 1px solid gainsboro; border-radius: 7px;margin-top: 10px">
+        <div ng-repeat="subValue in value.data.option track by $index" style="border: 1px solid gainsboro; border-width: 1px 0 0 0;">
+            <label style="width: 100%; padding: 5px 12px 10px 12px; margin-bottom: 0">
+                <input type="checkbox" ng-model="subValue.status" ng-disabled="design.isDisabled">
+                <span style="font-weight: normal; margin-left: 5px">{{subValue.text}}</span>
+            </label>
+        </div>
+    </div>
+</div>

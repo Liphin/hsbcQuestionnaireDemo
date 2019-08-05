@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="manage">
+<head>
+    <link rel="stylesheet" href="/public/assets/css/bootstrap/bootstrap.min.css">
+    <script src="/public/assets/js/jquery/jquery-1.11.0.js"></script>
+    <script src="/public/assets/js/bootstrap/bootstrap.min.js"></script>
+    <script src="/public/assets/js/angularjs/angular.js"></script>
+    <meta charset="UTF-8">
+    <title>数据结果统计分析</title>
+    <meta name="viewport" content="width=device-width">
+</head>
+<body ng-controller="manageCtrl as manage" style="display: flex;flex-direction: row; font-family: 微软雅黑">
+<!--Loading动画-->
+<div ng-if="manage.loading" ng-include="'/src/overall/tmpl/sub/loadAnimate.html'"></div>
+
+<div style="width: 100%">
+    <div style="display: flex; flex-direction: row">
+        <div style="flex: 0.5"></div>
+        <div style="flex: 9">
+            <!--针对某个表单数据进行统计分析-->
+            <div ng-repeat="value in manage.targetSheet.sheet track by $index">
+                <!--段落-->
+                <div ng-include="'/src/manage/tmpl/sub/content/result/sub/result_paragraph.html'"></div>
+
+                <!--选择题-->
+                <div ng-include="'/src/manage/tmpl/sub/content/result/sub/result_select.html'"></div>
+
+                <!--矩阵题-->
+                <div ng-include="'/src/manage/tmpl/sub/content/result/sub/result_matrix.html'"></div>
+            </div>
+        </div>
+        <div style="flex: 0.5"></div>
+    </div>
+    <!--占位符-->
+    <div style="width: 100%; height: 50px"></div>
+</div>
+
+<script>
+    "use strict";
+    /**
+     * 获取网页url参数
+     */
+    let getUrlParameter = function getUrlParameter(sParam) {
+        let sPageURL = window.location.search.substring(1),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName, i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+            }
+        }
+    };
+
+    //****************************** AngularJs ********************************
+    let manageModule = angular.module('manage', []);
+    manageModule.controller('manageCtrl', function ($http) {
+        //1、数据初始化
+        let manage = this;
+        manage.targetSheet = {};
+        manage.loading = true;
+        manage.device = 'mobile';
+        manage.resultData = {
+            result: {},
+            sheetClassify: {
+                paragraph: ['paragraph'],
+                select: ['single_select', 'single_scale', 'pull_single_select', 'multi_select'],
+                matrix: ['matrix_single_select', 'matrix_single_scale', 'matrix_multi_select'],
+                fill: ['single_fill', 'matrix_fill', 'detail_fill']
+            }
+        };
+
+        //2、获取指定表单页面参数
+        let _id = getUrlParameter("_id");
+        //http获取目标页面表单原始数据的和问卷结果
+        if (_id != undefined && _id != false && _id != null) {
+            $http.post("/getTargetSheetAndResult", {_id: _id}).success(function (response) {
+                if (response.status == 200) {
+                    //循环填充表单数据
+                    for (let i in response.sheet) {
+                        manage.targetSheet[i] = response.sheet[i];
+                    }
+                    //循环填充分析结果数据
+                    for (let i in response.result.result) {
+                        manage.resultData.result[i] = response.result.result[i];
+                    }
+                }
+                //数据获取失败
+                else {
+                    alert("很抱歉，系统出错，请稍后重试");
+                }
+            }).error(function (err) {
+                alert("很抱歉，系统出错，请稍后重试");
+
+            }).finally(function () {
+                manage.loading = false;
+            });
+        }
+
+
+        /**
+         * 结果分析统计时一些数据计算
+         */
+        manage.getStatisticNum = function (type, data, data2) {
+            switch (type) {
+                //小计统计
+                case 'selectMinCount': {
+                    return data > 0 ? data : 0;
+                }
+                //百分比计算
+                case 'selectPercent': {
+                    let num = data > 0 ? data : 0;
+                    let total = 0;
+                    for (let i in data2) {
+                        //如果是other类型则添加该数组的个数，否则直接添加该选项选择的人数数字
+                        if (i == 'other') {
+                            total += data2[i].length;
+                        } else {
+                            total += data2[i];
+                        }
+                    }
+                    return (parseFloat(num) / total * 100).toFixed(2);
+                }
+                //总数统计
+                case 'selectSum': {
+                    let total = 0;
+                    for (let i in data) {
+                        //如果是other类型则添加该数组的个数，否则直接添加该选项选择的人数数字
+                        if (i == 'other') {
+                            total += data[i].length;
+                        } else {
+                            total += data[i];
+                        }
+                    }
+                    return total
+                }
+                //matrix类型百分比计算
+                case 'matrixPercent': {
+                    let num = data > 0 ? data : 0;
+                    let total = 0;
+                    for (let i in data2) {
+                        total += data2[i];
+                    }
+                    return (parseFloat(num) / total * 100).toFixed(2);
+                }
+                //matrix类型汇总计算
+                case 'matrixSum': {
+                    let total = 0;
+                    for (let i in data) {
+                        for (let j in data[i]) {
+                            total += data[i][j];
+                        }
+                    }
+                    return total;
+                }
+            }
+        };
+
+
+        /**
+         * 获取某问题的序号
+         * @returns {number}
+         */
+        manage.getQuestionnaireNum = function (index) {
+            //遍历问题表单到index前的每个选项，去除所有为paragraph类型的数据
+            let paraNum = 0;
+            for (let i = 0; i < index; i++) {
+                if (manage.targetSheet.sheet[i].type == 'paragraph') {
+                    paraNum++;
+                }
+            }
+            return index - paraNum + 1; //从1开始
+        };
+    });
+
+    /**
+     * 渲染表单中段落信息展现
+     */
+    manageModule.directive('sheetParagraph', function () {
+        return {
+            restrict: 'A',
+            scope: {
+                sheetParagraph: '@'
+            },
+            link: function (scope, ele, attrs) {
+                ele.html(scope.sheetParagraph);
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

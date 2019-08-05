@@ -1,0 +1,14 @@
+<!--组件页面-->
+<div>
+    <!--选择题-->
+    <div ng-repeat="value in design.widget" ng-if="value.sub.length>0" style="margin-bottom: 20px">
+        <div>{{value.name}}</div>
+        <div style="display: flex; flex-direction: row; flex-wrap: wrap">
+            <div class="widget" ng-repeat="(subKey, subValue) in value.sub"
+                 ng-click="design.addNewWidget(subValue.type)" style="cursor: pointer;width: 90px;margin: 5px 15px 0 0;;padding: 5px; border-radius: 5px;">
+                <i class="{{subValue.font}}" style="margin-right: 3px;"></i>
+                <span>{{subValue.name}}</span>
+            </div>
+        </div>
+    </div>
+</div>

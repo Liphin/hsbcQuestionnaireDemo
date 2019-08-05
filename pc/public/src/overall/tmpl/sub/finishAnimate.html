@@ -1,0 +1,84 @@
+<!--保存动画-->
+<style>
+    /*保存动画*/
+    .saveAnimate {
+        border: 1px solid #ccc7c7;
+        border-radius: 6px;
+        padding: 6px 35px;
+        display: inline-block;
+        background: white;
+        position: relative;
+        top: 8px;
+    }
+    /*显示出来*/
+    .saveAnimate.ng-hide-remove {
+        -webkit-animation: 0.8s saveAnimateShow;
+        animation: 0.8s saveAnimateShow;
+    }
+    /*展开操作*/
+    @keyframes saveAnimateShow {
+        0% {
+            top: -20px;
+        }
+        60% {
+            top: 8px;
+        }
+        100% {
+            top: 8px;
+        }
+    }
+    @-webkit-keyframes saveAnimateShow {
+        0% {
+            top: -20px;
+        }
+        60% {
+            top: 8px;
+        }
+        100% {
+            top: 8px;
+        }
+    }
+
+    /*隐藏操作*/
+    .saveAnimate.ng-hide-add{
+        -webkit-animation:0.4s saveAnimateHide;
+        animation:0.4s saveAnimateHide;
+    }
+    @keyframes saveAnimateHide {
+        0% {
+            top: 8px;
+        }
+        100% {
+            top: -35px;
+        }
+    }
+    @-webkit-keyframes saveAnimateHide {
+        0% {
+            top: 8px;
+        }
+        100% {
+            top: -35px;
+        }
+    }
+
+</style>
+<div align="center" style="width: 100%;text-align: center;position: fixed;left: 0;right: 0;top: 0; z-index:{{zIndexHelper['finishAnimation']}} ">
+    <div class="saveAnimate" ng-show="overallData.finishAnimation.status">
+        <div>
+            <span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: #00c200;margin-right: 5px"></span>
+            <span>{{overallData.finishAnimation.text}}</span>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

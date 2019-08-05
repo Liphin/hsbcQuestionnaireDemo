@@ -1,0 +1,27 @@
+<!--矩阵单选题-->
+<div ng-if="value.type=='matrix_single_select'" id="widget_{{$index}}">
+    <div style="font-weight: bold">
+        <!--设置必答非必答题目效果-->
+        <i class="fa fa-star" style="color: #ff6525;font-size: 12px; margin-right: 5px" ng-if="value.data.required"></i>
+        <!--题目序号和标题-->
+        <span>{{design.getQuestionnaireNum($index)}}、{{value.data.title}}</span>
+    </div>
+    <table class="table" style="margin-top: 10px">
+        <thead>
+        <tr>
+            <th style="border: none;"></th>
+            <th ng-repeat="radioValue in value.data.option" style="font-weight: normal; border: none;text-align: center">{{radioValue.text}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="subValue in value.data.choice">
+            <td style="font-weight: bold">{{subValue.text}}</td>
+            <td ng-repeat="radioValue in value.data.option track by $index" style="padding: 0">
+                <label style="width: 100%; text-align: center; padding: 8px">
+                    <input type="radio" ng-model="subValue.selected" value="{{$index}}" ng-disabled="design.isDisabled"/>
+                </label>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,79 @@
+<!--渲染页面-->
+<style>
+    .widgetOpt{
+        color: grey;
+        border-color: #bbbbbb;
+    }
+    .widgetOpt:hover{
+        color: white;
+        border-color: #4eb4ed;
+        background: #4eb4ed;
+    }
+    /** 组件编辑页面在鼠标放上去时，背景颜色发生变化 */
+    .widgetMouseOn:hover{
+        /*background: #fafafa;*/
+        background: #e8fafa;
+    }
+    .widgetMouseSelected{
+        /*background: #faf7fa;*/
+        /*background: #faf7fa;*/
+        background: #e8fafa;
+    }
+</style>
+<div style="display: flex;flex-direction: row;align-items: stretch;height: 100%; background: #f4f4f4; border: 1px solid gainsboro; border-width: 0 1px 0 1px">
+    <div style="flex: 1"></div>
+    <div class="scrollBar-7"
+         style="overflow-y: auto;background: white; width: 400px; padding: 20px 0 50px 0; box-shadow: 0 0 7px #a8a8a8; margin-top: 15px; ">
+        <div ng-click="design.editWidgetData($index)"
+             ng-class="{'widgetMouseSelected':design.overallData.editRenderIndex==$index}"
+             ng-repeat="value in design.sheet track by $index" style="position: relative; display: flex;">
+            <div style="flex: 1"></div>
+            <div style="flex: 8">
+                <!--占位空间-->
+                <div style="width: 100%;height: 20px"></div>
+                <div>
+                    <!------------------------ OUTLINE -------------------------->
+                    <design-render-paragraph></design-render-paragraph><!--内容-->
+
+                    <!------------------------ OUTLINE -------------------------->
+                    <design-render-single-select></design-render-single-select> <!--单选题-->
+                    <design-render-single-scale></design-render-single-scale> <!--量表题-->
+                    <design-render-matrix-single-select></design-render-matrix-single-select> <!--矩阵单选-->
+                    <design-render-matrix-single-scale></design-render-matrix-single-scale> <!--矩阵量表-->
+                    <design-render-pull-single-select></design-render-pull-single-select> <!--下拉单选-->
+
+                    <!------------------------ OUTLINE -------------------------->
+                    <design-render-multi-select></design-render-multi-select> <!--多选题-->
+                    <design-render-matrix-multi-select></design-render-matrix-multi-select> <!--矩阵多选-->
+
+                    <!------------------------ OUTLINE -------------------------->
+                    <design-render-single-fill></design-render-single-fill> <!--单项填空-->
+                    <design-render-matrix-fill></design-render-matrix-fill> <!--矩阵填空-->
+                    <design-render-detail-fill></design-render-detail-fill> <!--详情填写-->
+                </div>
+                <!--占位空间-->
+                <div style="width: 100%;padding: 20px 0; color: grey; display: flex; flex-direction: row;justify-content: flex-end; font-size: 12px">
+                    <!--复制、删除等操作-->
+                    <div ng-click="design.widgetOpt('copy',$index)" class="widgetOpt" style="margin-right: 20px; cursor: pointer; padding: 4px 8px; border-width: 1px;border-style: solid; height: 27px; border-radius: 5px">
+                        <i class="fa fa-copy"></i>
+                        <span>复制</span>
+                    </div>
+                    <div ng-click="design.widgetOpt('delete',$index)" class="widgetOpt" style="margin-right: 20px;cursor: pointer; padding: 4px 8px; border-width: 1px;border-style: solid; height: 27px; border-radius: 5px">
+                        <i class="fa fa-trash-o"></i>
+                        <span>删除</span>
+                    </div>
+                    <!--向上移动组件操作-->
+                    <div ng-click="design.widgetOpt('positionUp',$index)" class="widgetOpt" title="上移" style="margin-right: 20px; cursor: pointer; padding: 2px 8px; border-width: 1px;border-style: solid; height: 27px; border-radius: 5px; font-size: 15px">
+                        <i class="fa fa-arrow-circle-o-up"></i>
+                    </div>
+                    <!--向下移动组件操作-->
+                    <div ng-click="design.widgetOpt('positionDown',$index)" class="widgetOpt" title="下移" style="cursor: pointer; padding: 2px 8px; border-width: 1px;border-style: solid; height: 27px; border-radius: 5px;font-size: 15px">
+                        <i class="fa fa-arrow-circle-o-down"></i>
+                    </div>
+                </div>
+            </div>
+            <div style="flex: 1"></div>
+        </div>
+    </div>
+    <div style="flex: 1"></div>
+</div>

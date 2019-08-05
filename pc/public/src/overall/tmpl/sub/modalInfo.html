@@ -1,0 +1,49 @@
+<!--大型模态框设置-->
+<div class="modal fade" id="modal_info_lg" tabindex="-1" role="dialog" style="overflow: auto;text-align: left;z-index: {{zIndexHelper['info']}};" >
+    <div class="modal-dialog modal-lg" role="document">
+
+        <!--大型模态框Example-->
+        <div ng-if="" class="modal-content">
+            <div class="modal-header">
+               <div>填写头部</div>
+            </div>
+            <div class="modal-body">
+                <div>填写内容</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- 小型模态框模式 -->
+<div class="modal fade" id="modal_info_sm" tabindex="-1" role="dialog" style="overflow: auto;text-align: left;z-index: {{basic.zIndexHelper['info']}};">
+    <div class="modal-dialog" role="document">
+
+        <!--Manage 清空数据询问操作-->
+        <div ng-if="modalSetting.sm.manage.emptyAnalyse" class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">数据清除</h4>
+            </div>
+            <div class="modal-body" style="width: 80%; margin: 40px;font-size: 16px">
+                <div class="input-group">
+                    <span>确认清空：</span>
+                    <span style="font-weight: bold; color: #3392b9">{{manage.allSheetData[manage.analyseData.sheetIndex].title}} </span>
+                    <span>问卷统计数据</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" style="width: 62px; margin-right: 20px"
+                        ng-click="manage.emptyResult()">确定
+                </button>
+                <button type="button" class="btn" data-dismiss="modal">返回</button>
+            </div>
+        </div>
+
+    </div>
+</div>

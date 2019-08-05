@@ -1,0 +1,37 @@
+<!--权限设置-->
+<div style="height: 100%; background: white">
+    <div style="padding: 50px 0 0 50px; max-width: 900px">
+        <!--添加新授权的管理员账号-->
+        <div style="margin-bottom: 30px">
+            <span style="margin-right: 10px;display: inline-block; font-size: 15px; vertical-align: middle">新授权管理员账号：</span>
+            <input style="display: inline-block; width: 200px;margin-right: 30px;vertical-align: middle" class="form-control" ng-model="manage.rightSetting.newAdminAccount"/>
+            <button class="btn btn-info" style="display: inline-block;vertical-align: middle"
+                ng-click="manage.setAdminRight(manage.rightSetting.newAdminAccount, 2)">确认授权</button>
+        </div>
+
+        <!--已有授权的管理员账号-->
+        <table class="table table-striped table-hover" style="text-align: center;border: 1px solid gainsboro;">
+            <thead>
+            <tr>
+                <th style="width: 250px; text-align: center">序号</th>
+                <th style="width: 250px; text-align: center">管理员账号</th>
+                <th style="width: 250px; text-align: center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="value in manage.rightSetting.adminAccount track by $index">
+                <td>
+                    <span>{{$index+1}}</span>
+                </td>
+                <td>
+                    <span>{{value.account}}</span>
+                </td>
+                <td>
+                    <span ng-click="manage.setAdminRight(value.account, 1)"
+                          style="color: #4b9eb6; text-decoration: underline; cursor: pointer">取消授权</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

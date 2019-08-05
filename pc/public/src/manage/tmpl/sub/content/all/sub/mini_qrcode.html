@@ -1,0 +1,32 @@
+<!--手机预览展示区-->
+<style>
+    .panelClose:hover{
+        color: #1d92ee;
+    }
+</style>
+<div ng-if="manage.overallData.miniView.showMiniView" align="center"
+     style="background: rgba(93,93,94,0.55);position: fixed;top: 0;left: 0; right: 0; bottom: 0; width: 100%;
+        z-index: {{zIndexHelper.phoneView}};height: 100%; display: flex;justify-content: center; align-items: center">
+
+    <!--二维码展示-->
+    <div style="width: 580px; height: 470px; background: white; display: flex;flex-direction: column; border-radius: 20px">
+        <div style="font-size: 20px">
+            <span style="position: relative; top: 25px">小程序端预览</span>
+            <span class="panelClose" style="cursor: pointer;font-size: 35px; float: right; position: relative; right: 20px; top: 10px;"
+                  ng-click="manage.overallData.miniView.showMiniView=false">&times;</span>
+        </div>
+
+        <div style="display: flex; flex: 1; align-items: center; justify-content: center">
+            <div style="border: 1px solid gainsboro;padding: 20px">
+                <img src="{{manage.overallData.miniView.sheetMiniQrCodeUrl}}" style="width: 200px; height: 200px"/>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 60px">
+            <a download="{{manage.overallData.miniView.downloadName}}" href="{{manage.overallData.miniView.sheetMiniQrCodeUrl}}"
+            style="background: #03A9F4; color: white; padding: 8px 25px; border-radius: 5px">下载二维码</a>
+        </div>
+    </div>
+</div>
+
+

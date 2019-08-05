@@ -1,0 +1,24 @@
+<!--单项选择题-->
+<div ng-if="value.type=='matrix_fill'" id="widget_{{$index}}">
+    <div style="font-weight: bold">
+        <!--设置必答非必答题目效果-->
+        <i class="fa fa-star" style="color: #ff6525;font-size: 12px; margin-right: 5px" ng-if="value.data.required"></i>
+        <!--题目序号和标题-->
+        <span>{{design.getQuestionnaireNum($index)}}、{{value.data.title}}</span>
+    </div>
+    <div style="margin-top: 10px">
+        <table class="table">
+            <tbody>
+            <tr ng-repeat="subValue in value.data.option track by $index">
+                <td style="padding: 12px; text-align: center; border: none">
+                    {{subValue.text}}
+                </td>
+
+                <td style="padding: 8px; border: none;">
+                    <input type="text" ng-disabled="design.isDisabled" class="form-control" ng-model="subValue.value">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

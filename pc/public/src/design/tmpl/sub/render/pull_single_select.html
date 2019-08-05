@@ -1,0 +1,14 @@
+<!--单项选择题-->
+<div ng-if="value.type=='pull_single_select'" id="widget_{{$index}}">
+    <div style="font-weight: bold">
+        <!--设置必答非必答题目效果-->
+        <i class="fa fa-star" style="color: #ff6525;font-size: 12px; margin-right: 5px" ng-if="value.data.required"></i>
+        <!--题目序号和标题-->
+        <span>{{design.getQuestionnaireNum($index)}}、{{value.data.title}}</span>
+    </div>
+    <div style="margin-top: 10px">
+        <select class="form-control" ng-model="value.data.selected" ng-disabled="design.isDisabled">
+            <option ng-repeat="subValue in value.data.option track by $index" value="{{$index}}">{{subValue.text}}</option>
+        </select>
+    </div>
+</div>

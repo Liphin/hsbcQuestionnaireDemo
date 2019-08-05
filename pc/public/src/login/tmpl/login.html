@@ -1,0 +1,102 @@
+<!--登录页面操作-->
+<style>
+    .registerText{
+        color: #fa9111;
+    }
+    .registerText:hover{
+        color: orangered;
+        /*font-weight: bold;*/
+    }
+</style>
+<div style="position: fixed; top: 0; right: 0; bottom: 0;left:0;width: 100%; height: 100%;
+    background: url(/public/assets/img/overall/login/bg.jpg) no-repeat center; background-size: cover;
+    display: flex; justify-content: center; align-items: center">
+
+    <!-----------用户登录----------->
+    <div ng-if="login.pageConfig.showLogin" style="padding: 30px 50px;background: white;width: 470px;border-radius: 20px;">
+        <!--登录面板说明-->
+        <div style="font-size: 24px;font-weight: bold;color: #fa9111;margin-bottom: 30px;">问卷登录</div>
+
+        <!--账号-->
+        <div style="border: 1px solid gainsboro;border-radius: 40px;padding: 9px;display: flex;">
+            <i class="fa fa-user" style="font-size: 23px;margin-left: 10px;color: #c5c5c5;"></i>
+            <input ng-model="login.loginInfo.account" placeholder="账号填写"
+                   style="margin-left: 16px;flex: 1;margin-right: 10px;border: none;outline: none;">
+        </div>
+
+        <!--密码-->
+        <div style="border: 1px solid gainsboro;border-radius: 40px;padding: 9px;display: flex;margin-top: 20px">
+            <i class="fa fa-lock" style="font-size: 23px;margin-left: 10px;color: #c5c5c5;"></i>
+            <input ng-model="login.loginInfo.password" placeholder="密码填写" type="password"
+                   style="margin-left: 16px;flex: 1;margin-right: 10px;border: none;outline: none;">
+        </div>
+
+        <!--登录按钮-->
+        <button ng-click="login.loginOpt()" class="btn btn-info" style="border-color: #fa9111;margin: 35px 0 10px 0;width: 100%;
+            border-radius: 40px;padding: 10px;background: #fa9111;outline: none;font-size: 16px;">
+            登录
+        </button>
+
+        <!--注册文字-->
+        <div class="registerText" ng-click="login.pageConfig.showLogin=false;" style="cursor: pointer;margin: 10px 0 25px 0;font-size: 16px; text-align: center">
+            立即注册
+        </div>
+
+        <!--第三方登录-->
+        <div style="margin: 0 0 20px 0;">
+            <!--第三方登录说明-->
+            <div style="display: flex;align-items: center; margin-bottom: 17px; color: grey">
+                <span style="flex: 1;width: 100%; height: 1px; background: #c5c5c5"></span>
+                <span style="margin:0 10px">第三方登录</span>
+                <span style="flex: 1;width: 100%; height: 1px; background: #c5c5c5"></span>
+            </div>
+
+            <div style="display: flex; flex-direction: row; justify-content: center">
+                <!--qq登录-->
+                <div style="text-align: center; cursor: pointer" ng-init="qqImg='qq.png'"
+                      ng-mouseenter="qqImg='qq-hover.png'" ng-mouseleave="qqImg='qq.png'">
+                    <img src="/public/assets/img/overall/login/{{qqImg}}"/>
+                    <div style="font-size: 12px">QQ登录</div>
+                </div>
+
+                <!--微信登录-->
+                <div style="margin-left: 20px;text-align: center; cursor: pointer" ng-init="weixinImg='weixin.png'"
+                     ng-mouseenter="weixinImg='weixin-hover.png'" ng-mouseleave="weixinImg='weixin.png'">
+                    <img src="/public/assets/img/overall/login/{{weixinImg}}"/>
+                    <div style="font-size: 12px">微信登录</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-----------用户注册----------->
+    <div ng-if="!login.pageConfig.showLogin" style="padding: 30px 50px;background: white;width: 470px;border-radius: 20px;">
+        <!--登录面板说明-->
+        <div style="font-size: 24px;font-weight: bold;color: #fa9111;margin-bottom: 30px;">用户注册</div>
+
+        <!--账号-->
+        <div style="border: 1px solid gainsboro;border-radius: 40px;padding: 9px;display: flex;">
+            <i class="fa fa-user" style="font-size: 23px;margin-left: 10px;color: #c5c5c5;"></i>
+            <input ng-model="login.loginInfo.account" placeholder="账号填写"
+                   style="margin-left: 16px;flex: 1;margin-right: 10px;border: none;outline: none;">
+        </div>
+
+        <!--密码-->
+        <div style="border: 1px solid gainsboro;border-radius: 40px;padding: 9px;display: flex;margin-top: 20px">
+            <i class="fa fa-lock" style="font-size: 23px;margin-left: 10px;color: #c5c5c5;"></i>
+            <input ng-model="login.loginInfo.password" placeholder="密码填写" type="password"
+                   style="margin-left: 16px;flex: 1;margin-right: 10px;border: none;outline: none;">
+        </div>
+
+        <!--登录按钮-->
+        <button ng-click="login.registerOpt()" class="btn btn-info" style="border-color: #fa9111;margin: 35px 0 40px 0;width: 100%;
+            border-radius: 40px;padding: 10px;background: #fa9111;outline: none;font-size: 16px;">
+            注册
+        </button>
+        <!--注册文字-->
+        <div class="registerText" ng-click="login.pageConfig.showLogin=true;" style="cursor: pointer;margin: 10px 0 25px 0;font-size: 16px; text-align: center">
+            点击返回登录
+        </div>
+    </div>
+
+</div>

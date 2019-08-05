@@ -1,0 +1,28 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+
+#若.gitignore文件是后续添加时，则需要执行以下命令重新刷新缓存才起作用
+#git rm -r --cached .
+#git add .
+#git commit -m 'update .gitignore'
+
+#忽略idea、Log和前端后台node依赖包
+/.idea
+/log
+/node_modules
+/resource
+
+#忽略java后台本地编译生成的相关文件
+ViewCoder.iml
+beanson_rush_01.iml
+/meta
+/out
+/pic
+/target
